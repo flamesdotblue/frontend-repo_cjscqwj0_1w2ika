@@ -3,8 +3,6 @@ import HeaderNav from './components/HeaderNav.jsx';
 import HeroSection from './components/HeroSection.jsx';
 import Highlights from './components/Highlights.jsx';
 import SiteFooter from './components/SiteFooter.jsx';
-import CookieBanner from './components/CookieBanner.jsx';
-import LiveChatWidget from './components/LiveChatWidget.jsx';
 
 // Pages
 import Platforms from './pages/Platforms.jsx';
@@ -48,8 +46,6 @@ function App() {
         {renderRoute()}
       </main>
       <SiteFooter />
-      <CookieBanner />
-      <LiveChatWidget />
     </div>
   );
 }
