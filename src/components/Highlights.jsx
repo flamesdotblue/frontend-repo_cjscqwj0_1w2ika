@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, Gauge, Wallet, Smartphone, LineChart } from 'lucide-react';
+import SimpleCarousel from './SimpleCarousel.jsx';
 
 const features = [
   {
@@ -24,9 +25,31 @@ const features = [
   },
 ];
 
+function useReveal() {
+  const ref = React.useRef(null);
+  const [seen, setSeen] = React.useState(false);
+  React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          setSeen(true);
+          io.disconnect();
+        }
+      });
+    }, { threshold: 0.2 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+  return { ref, seen };
+}
+
 function Highlights() {
+  const { ref, seen } = useReveal();
+
   return (
-    <section className="relative py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-black to-zinc-950">
+    <section ref={ref} className={`relative py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-black to-zinc-950 transition-opacity duration-700 ${seen ? 'opacity-100' : 'opacity-0'}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
@@ -46,21 +69,16 @@ function Highlights() {
               ))}
             </ul>
             <div className="mt-8 flex gap-3">
-              <a href="#" className="inline-flex items-center justify-center rounded-lg bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-zinc-100">Open account</a>
-              <a href="#" className="inline-flex items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/10 px-4 py-2.5 text-sm font-medium hover:bg-white/15">Compare accounts</a>
+              <a href="#/register" className="inline-flex items-center justify-center rounded-lg bg-white text-black px-4 py-2.5 text-sm font-medium hover:bg-zinc-100">Open account</a>
+              <a href="#/accounts" className="inline-flex items-center justify-center rounded-lg bg-white/10 ring-1 ring-white/10 px-4 py-2.5 text-sm font-medium hover:bg-white/15">Compare accounts</a>
             </div>
           </div>
 
-          <div className="grid sm:grid-cols-2 gap-4">
-            {features.map((f, i) => (
-              <div key={i} className="rounded-2xl bg-white/5 ring-1 ring-white/10 p-5">
-                <div className="flex items-center gap-3">
-                  {f.icon}
-                  <h3 className="font-medium">{f.title}</h3>
-                </div>
-                <p className="mt-2 text-sm text-zinc-300">{f.desc}</p>
-              </div>
-            ))}
+          <div className="grid gap-4">
+            <SimpleCarousel />
+            <div className="rounded-2xl bg-[radial-gradient(closest-side,rgba(52,211,153,.2),transparent_70%)] ring-1 ring-white/10 p-6">
+              <p className="text-sm text-zinc-300">Join thousands of traders worldwide leveraging modern tools and deep liquidity to pursue their strategies.</p>
+            </div>
           </div>
         </div>
       </div>
