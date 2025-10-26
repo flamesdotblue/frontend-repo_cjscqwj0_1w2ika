@@ -61,13 +61,21 @@ function HeaderNav() {
                   <p className="font-medium">Trading Platforms</p>
                   <p className="text-sm text-zinc-300">MT4, MT5, cTrader and more</p>
                 </a>
-                <a className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
+                <a onClick={() => changeRoute('/platforms/mobile')} className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
                   <p className="font-medium">Mobile</p>
                   <p className="text-sm text-zinc-300">iOS and Android</p>
                 </a>
-                <a className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
-                  <p className="font-medium">Web</p>
-                  <p className="text-sm text-zinc-300">Trade in your browser</p>
+                <a onClick={() => changeRoute('/platforms/mt4')} className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
+                  <p className="font-medium">MetaTrader 4</p>
+                  <p className="text-sm text-zinc-300">EAs and classic terminal</p>
+                </a>
+                <a onClick={() => changeRoute('/platforms/mt5')} className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
+                  <p className="font-medium">MetaTrader 5</p>
+                  <p className="text-sm text-zinc-300">Multi‑asset & advanced tools</p>
+                </a>
+                <a onClick={() => changeRoute('/platforms/ctrader')} className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
+                  <p className="font-medium">cTrader</p>
+                  <p className="text-sm text-zinc-300">Depth of market & cBots</p>
                 </a>
                 <a className="rounded-xl p-3 hover:bg-white/5 cursor-pointer">
                   <p className="font-medium">Tools</p>
@@ -133,6 +141,12 @@ function HeaderNav() {
         <div className="md:hidden border-t border-white/10">
           <div className="px-4 py-4 space-y-3">
             <button onClick={() => changeRoute('/platforms')} className="block w-full text-left px-3 py-2 rounded-lg bg-white/5">Platforms</button>
+            <div className="grid grid-cols-2 gap-2">
+              <button onClick={() => changeRoute('/platforms/mt4')} className="px-3 py-2 rounded-lg bg-white/5 text-sm">MT4</button>
+              <button onClick={() => changeRoute('/platforms/mt5')} className="px-3 py-2 rounded-lg bg-white/5 text-sm">MT5</button>
+              <button onClick={() => changeRoute('/platforms/ctrader')} className="px-3 py-2 rounded-lg bg-white/5 text-sm">cTrader</button>
+              <button onClick={() => changeRoute('/platforms/mobile')} className="px-3 py-2 rounded-lg bg-white/5 text-sm">Mobile</button>
+            </div>
             <button onClick={() => changeRoute('/markets')} className="block w-full text-left px-3 py-2 rounded-lg bg-white/5">Markets</button>
             <a href="#/accounts" className="block px-3 py-2 rounded-lg bg-white/5">Accounts</a>
             <a href="#/pricing" className="block px-3 py-2 rounded-lg bg-white/5">Pricing</a>

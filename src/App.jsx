@@ -9,6 +9,10 @@ import Platforms from './pages/Platforms.jsx';
 import Markets from './pages/Markets.jsx';
 import Accounts from './pages/Accounts.jsx';
 import Auth from './pages/Auth.jsx';
+import PlatformMT4 from './pages/PlatformMT4.jsx';
+import PlatformMT5 from './pages/PlatformMT5.jsx';
+import PlatformCTrader from './pages/PlatformCTrader.jsx';
+import PlatformMobile from './pages/PlatformMobile.jsx';
 
 function App() {
   const [route, setRoute] = React.useState(() => window.location.hash.replace('#', '') || '/');
@@ -24,6 +28,12 @@ function App() {
   }, [route]);
 
   const renderRoute = () => {
+    // Detailed platform subpages
+    if (route.startsWith('/platforms/mt4')) return <PlatformMT4 />;
+    if (route.startsWith('/platforms/mt5')) return <PlatformMT5 />;
+    if (route.startsWith('/platforms/ctrader')) return <PlatformCTrader />;
+    if (route.startsWith('/platforms/mobile')) return <PlatformMobile />;
+
     if (route.startsWith('/platforms')) return <Platforms />;
     if (route.startsWith('/markets')) return <Markets />;
     if (route.startsWith('/accounts')) return <Accounts />;
